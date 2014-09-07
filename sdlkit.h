@@ -214,10 +214,10 @@ static void loop (void)
 			switch (e.type) {
 				case SDL_QUIT:
 					return;
-	
+
 				case SDL_KEYDOWN:
 					keys[e.key.keysym.sym] = true;
-	
+
 				default: break;
 			}
 		}

@@ -34,7 +34,7 @@ int LoadTGA(Spriteset& tiles, const char *filename)
 	tiles.height=height;
 	tiles.width=height;
 	tiles.pitch=width;
-	
+
 	return 0;
 }
 
@@ -131,4 +131,3 @@ bool MouseInBox(int x, int y, int w, int h)
 		return true;
 	return false;
 }
-

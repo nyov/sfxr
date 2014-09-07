@@ -160,7 +160,7 @@ void ResetParams()
 	p_lpf_ramp=0.0f;
 	p_hpf_freq=0.0f;
 	p_hpf_ramp=0.0f;
-	
+
 	p_pha_offset=0.0f;
 	p_pha_ramp=0.0f;
 
@@ -210,7 +210,7 @@ bool LoadSettings(char* filename)
 	fread(&p_lpf_ramp, 1, sizeof(float), file);
 	fread(&p_hpf_freq, 1, sizeof(float), file);
 	fread(&p_hpf_ramp, 1, sizeof(float), file);
-	
+
 	fread(&p_pha_offset, 1, sizeof(float), file);
 	fread(&p_pha_ramp, 1, sizeof(float), file);
 
@@ -261,7 +261,7 @@ bool SaveSettings(char* filename)
 	fwrite(&p_lpf_ramp, 1, sizeof(float), file);
 	fwrite(&p_hpf_freq, 1, sizeof(float), file);
 	fwrite(&p_hpf_ramp, 1, sizeof(float), file);
-	
+
 	fwrite(&p_pha_offset, 1, sizeof(float), file);
 	fwrite(&p_pha_ramp, 1, sizeof(float), file);
 
@@ -381,7 +381,7 @@ void SynthSample(int length, float* buffer, FILE* file)
 		if(period<8) period=8;
 		square_duty+=square_slide;
 		if(square_duty<0.0f) square_duty=0.0f;
-		if(square_duty>0.5f) square_duty=0.5f;		
+		if(square_duty>0.5f) square_duty=0.5f;
 		// volume envelope
 		env_time++;
 		if(env_time>env_length[env_stage])
@@ -531,7 +531,7 @@ static int AudioCallback(void *inputBuffer, void *outputBuffer,
 	else
 		for(int i=0;i<framesPerBuffer;i++)
 			*out++=0.0f;
-	
+
 	return 0;
 }
 #else
@@ -610,7 +610,7 @@ bool ExportWAV(char* filename)
 	dword=file_sampleswritten*wav_bits/8;
 	fwrite(&dword, 1, 4, foutput); // chunk size (data)
 	fclose(foutput);
-	
+
 	return true;
 }
 
@@ -1127,7 +1127,7 @@ void ddkInit()
 	ddkSetMode(640,480, 32, 60, DDK_WINDOW, "sfxr"); // requests window size etc from ddrawkit
 
 	if (LoadTGA(font, "/usr/share/sfxr/font.tga")) {
-        	/* Try again in cwd */
+		/* Try again in cwd */
 		if (LoadTGA(font, "font.tga")) {
 			fprintf(stderr,
 				"Error could not open /usr/share/sfxr/font.tga"
@@ -1137,7 +1137,7 @@ void ddkInit()
 	}
 
 	if (LoadTGA(ld48, "/usr/share/sfxr/ld48.tga")) {
-        	/* Try again in cwd */
+		/* Try again in cwd */
 		if (LoadTGA(ld48, "ld48.tga")) {
 			fprintf(stderr,
 				"Error could not open /usr/share/sfxr/ld48.tga"
@@ -1193,12 +1193,11 @@ void ddkFree()
 	delete input;
 	free(ld48.data);
 	free(font.data);
-	
+
 #ifdef WIN32
 	// Close PortAudio
-    Pa_StopStream(stream);
-    Pa_CloseStream(stream);
-    Pa_Terminate();
+	Pa_StopStream(stream);
+	Pa_CloseStream(stream);
+	Pa_Terminate();
 #endif
 }
-

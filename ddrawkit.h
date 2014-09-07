@@ -3,14 +3,14 @@
 
    Porting notes
    -------------
-   
+
    Need to provide window/framebuffer setup at program start
-   
+
    ddkUnlock() is called when the window should be redrawn
-   
+
    WinMain() at the bottom of this file is the entry point and main loop
    which handles messages and calling the app update function ddkCalcFrame()
-   
+
    ddkscreen32  =  pointer to 640x480 DWORD pixel buffer
    mouse_*  =  mouse info, only need x/y/px/py/left/right/leftclick/rightclick
 
@@ -95,7 +95,7 @@ void InitImageBuffer()
 
 	hBM=CreateDIBSection(hDC, (BITMAPINFO*)&BMInfo, DIB_RGB_COLORS, (void**)&image_bitmap, 0, 0);
 	ReleaseDC(ActiveWindow, hDC);
-	
+
 	ddkscreen32=image_bitmap;
 	ddkpitch=ddrawkit_width;
 }
@@ -149,7 +149,7 @@ LRESULT CALLBACK MainWindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 		else
 			SetCursor(cursor_arrow);
 		break;
-			
+
 	case WM_MOUSEMOVE:
 		int curwidth, curheight;
 		RECT rect;
@@ -231,7 +231,7 @@ void ddkDrawPixel(int x, int y, int red, int green, int blue)
 {
 	if(x<0 || y<0 || x>=ddrawkit_width || y>=ddrawkit_height)
 		return;
-		
+
 	if(ddrawkit_bpp==32)
 	{
 		DWORD color=(red<<16)|(green<<8)|blue;
@@ -245,7 +245,7 @@ void ddkDrawPixel(int x, int y, int red, int green, int blue)
 }
 
 void ddkSetMode(int width, int height, int bpp, int refreshrate, int fullscreen, char *title)
-{	
+{
 	if(!ddrawkit_initialised)
 	{
 		ddrawkit_width=width;
@@ -293,10 +293,10 @@ void ddkSetMode(int width, int height, int bpp, int refreshrate, int fullscreen,
 
 		// init DDB implementation
 		hDC_comp=CreateCompatibleDC(NULL);
-	 	InitImageBuffer();
-		
+		InitImageBuffer();
+
 		ShowWindow(hWndMain, SW_SHOW);
-	
+
 		ddrawkit_initialised=true;
 		ddrawkit_released=false;
 
@@ -319,10 +319,10 @@ int ddkGetBpp()
 	return ddrawkit_bpp;
 }
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int) 
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int)
 {
 	MSG	msg;
-	
+
 	hInstanceMain=hInstance;
 
 	cursor_arrow=LoadCursor(NULL, IDC_ARROW);
@@ -351,7 +351,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int)
 
 		if(ddrawkit_released)
 			break;
-		
+
 		if(!ddkCalcFrame())
 		{
 			ddrawkit_SafeDestroy();
